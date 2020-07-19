@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        .jumbotron{
+            background-color: aquamarine;
+        }
+        body{
+            background-image: url( "{% static 'images/books.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: top;
+            background-attachment: fixed;
+        }
+        
+        .blogs{
+            /* display: block;
+            margin-right: auto;
+            margin-left: auto;
+            text-align: center;
+            background-color: aquamarine;
+            width: 50%; */
+        }
+        a{
+            text-decoration: none;
+            color: rgb(23, 27, 26);
+        }
+        button{
+            display: block;
+            height: 30px;
+            background-color: aquamarine;
+        }
+        .landing{
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            
+        }
+        .create{
+            position: absolute;
+            top: 30px; 
+            right: 30px;
+        }
+        a:hover{
+            text-decoration: none;
+        }
+        
+        
+        
+    </style>
+</head>
+<body style="font-family: verdana;">
+    <button class="landing"><a href="{% url 'landing-page' %}"><h5>Go to landing page</h5></a></button>
+    <button class="create"><a href="{% url 'blogs:create' %}"><h5>Create Blog</h5></a></button>
+
+    <br>
+    <br>
+    <div class="blog-content">
+        <div class="container blogs">
+            <br>
+            <br>
+            <h1 style="text-align: center; color:blue">Welcome to the blog page</h1> 
+
+            {% for blog in blogs %}
+
+            <div class="jumbotron">
+                <b><u><h4>{{ blog.title }}</h4></u></b>
+                <br><b>Author => </b>{{ blog.author }}, <small>{{ blog.created_at }}</small>
+                <br>
+                {% if blog.created_at != blog.updated_at %}
+    
+                    <small>Updated at: {{ blog.updated_at }}</small> 
+                    <br>
+                {% endif %}
+                <br><br>
+                {{ blog.content }}
+                
+            </div>  
+                
+                
+            {% endfor %}
+        </div>
+    </div>
+    
+    
+</body>
+</html>

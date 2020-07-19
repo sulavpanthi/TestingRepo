@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    
+    
+    <style>
+        body{
+            background-image: url("{% static 'books.jpg' %}");
+            /* background-repeat: no-repeat; */
+            background-size: 100%;
+            background-position: top;
+            background-attachment: fixed;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        button{
+            display: inline-block;
+            /* margin-left: 85%; */
+            margin-top: 5px;
+            height: 55px;
+            background-color: aquamarine;
+            cursor: pointer;
+
+        }
+        button:hover{
+            background-color: rgba(182, 245, 245, 0.8);
+            
+        }
+
+        a{
+            text-decoration: none;
+            color: rgb(23, 27, 26);
+            /* padding-bottom: 3px; */
+        }
+        .blogs{
+            /* position: absolute;
+            top: 30px;
+            left: 30px; */
+
+            
+        }
+        .create{
+            /* position: absolute;
+            top: 30px; 
+            right: 30px; */
+        } 
+        
+        .intro-text{
+            display:block;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 17%;
+            font-size: 20px;
+            color:rgb(245, 234, 182)
+            /* justify-content: center; */
+            /* background-color: red; */
+
+        }
+
+        .intro-nav{
+            /* margin-left: auto;
+            margin-right: auto; */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    
+       
+
+    <div class="intro-text">
+        <h1>Welcome to landing page</h1>
+
+    </div>
+    <br>
+    <div class="intro-nav">
+        <a href="{% url 'blogs:create' %}"><button><h3>Create a new Blog</h3></button></a>
+
+        <br>
+    
+        <a href="{% url 'blogs:blog' %}"><button><h3>Go to Blogs</h3></button></a>
+    </div>
+        
+    <br>
+    
+</body>
+</html>
