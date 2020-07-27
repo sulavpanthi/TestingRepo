@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a blog</title>
+    <style>
+        body{
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 8%;
+            text-align: center;
+            background-color: aquamarine;
+        }
+        button:hover{
+            cursor:pointer
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        Create your blog
+    </h1>
+    <br>
+    <form method='post'>
+
+        {% csrf_token %}
+        
+        Title : <br>{{ form.title }}<br><br>
+        Content : <br>{{ form.content }}<br><br>
+        
+        <br><br>
+
+        <button type="submit" style="background-color: aqua; width: 120px; height: 35px; font-size: medium; border-color: rgb(52, 81, 136);">Save</button>
+
+        
+        
+
+    </form>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body{
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 8%;
+            text-align: center;
+            background-color: aquamarine;
+        }
+        button:hover{
+            cursor:pointer
+        }
+    </style>
+</head>
+<body>
+    <h1>Login</h1>
+    <br>
+
+    <form method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+        Email<br>
+        {{form.email}}<br><br>
+        Password<br>
+        {{form.password}}<br><br>
+        <b style="color:tomato">Create account from <a href="/user/signup/">here</a></b>
+        <br><br>
+        <button type="submit" style="background-color: aqua; width: 120px; height: 35px; font-size: medium; border-color: rgb(52, 81, 136);">Login</button>
+    </form>
+    
+</body>
+</html>

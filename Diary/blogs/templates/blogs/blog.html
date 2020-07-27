@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        .jumbotron{
+            background-color: aquamarine;
+        }
+        body{
+            background-image: url( "{% static 'images/books.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: top;
+            background-attachment: fixed;
+        }
+        
+        .blogs{
+            /* display: block;
+            margin-right: auto;
+            margin-left: auto;
+            text-align: center;
+            background-color: aquamarine;
+            width: 50%; */
+        }
+        a{
+            text-decoration: none;
+            color: rgb(23, 27, 26);
+        }
+        button{
+            display: block;
+            height: 30px;
+            background-color: aquamarine;
+        }
+        .landing{
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            
+        }
+        .create{
+            position: absolute;
+            top: 30px; 
+            right: 30px;
+        }
+        a:hover{
+            text-decoration: none;
+        }
+        
+        
+        
+    </style>
+</head>
+<body style="font-family: verdana;">
+
+  {% if request.user.is_authenticated %}
+
+    <button class="landing"><a href="{% url 'user:profile' %}"><h5>Go to profile page</h5></a></button>
+
+    <button class="create"><a href="{% url 'blogs:create' %}"><h5>Create Blog</h5></a></button>
+
+  {% else %}
+    <button class="landing"><a href="{% url 'user:login' %}"><h5>Login</h5></a></button>
+  {% endif %}
+    
+
+    <br>
+    <br>
+    <div class="blog-content">
+        <div class="container blogs">
+            <br>
+            <br>
+            <h1 style="text-align: center; color:blue">Welcome to the blog page</h1> 
+
+            {% for blog in blogs %}
+
+            <div class="jumbotron">
+                <b><u><h4>{{ blog.title }}</h4></u></b>
+                <br><b>Author => </b>{{ blog.author }}, <small>{{ blog.created_at }}</small>
+                <br>
+                {% if blog.created_at != blog.updated_at %}
+    
+                    <small>Updated at: {{ blog.updated_at }}</small> 
+                    <br>
+                {% endif %}
+                <br><br>
+                {{ blog.content }}
+                
+            </div>  
+                
+                
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <!-- pagination implementation start -->
+
+    {% if blogs.has_other_pages %}
+
+    <ul class="pagination justify-content-center">
+        {% if blogs.has_previous %}
+          <li class="page-item"><a href="?page={{ blogs.previous_page_number }}" class="page-link" tabindex="-1">&laquo;</a></li>
+        {% else %}
+          <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+        {% endif %}
+        {% for i in blogs.paginator.page_range %}
+          {% if blogs.number == i %}
+            <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li class="page-item"><a href="?page={{ i }}" class="page-link" tabindex="-1">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if blogs.has_next %}
+          <li class="page-item"><a href="?page={{ blogs.next_page_number }}" class="page-link" tabindex="-1">&raquo;</a></li>
+        {% else %}
+          <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+        {% endif %}
+      </ul>
+    {% endif %}
+
+    <!-- pagination implementation end -->
+    
+    
+</body>
+</html>

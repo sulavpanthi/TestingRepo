@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        .jumbotron{
+            background-color: rgb(248, 243, 243);
+        }
+        body{
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 8%;
+            text-align: center;
+            background-color: rgb(40, 243, 175);
+        }
+        button:hover{
+            cursor:pointer
+        }
+    </style>
+</head>
+<body>
+    <button type="button"><a href="{% url 'blogs:list' %}" style="text-decoration: none;"><h3>Goto blogs list</h3></a></button>
+    <br><br>
+    <h1>Profile</h1>
+    <br>
+    <a href="{% url 'blogs:create' %}">Create a new blog</a><br><br>
+<a href="/user/logout/">Logout</a> | <a href="/user/update/{{request.user.id}}/">Update profile</a>
+<br>
+    Name: {{request.user.get_full_name}}
+    <br><br>
+    Email: {{request.user.email}}
+    <br><br>
+    Username: {{request.user.username}}
+    <br><br>
+    <h1>Blogs</h1>
+    
+    {% for blog in blogs %}
+        <div class="container jumbotron">
+            <b><u><h4>{{ blog.title }}</h4></u></b>
+            <a href="{% url 'blogs:update' blog.id %}">Update</a> |
+            <a href="{% url 'blogs:delete' blog.id %}">Delete</a>
+            <br><br><b>Author => </b>{{ blog.author }}, <small>{{ blog.created_at }}</small>
+            <br>
+            {% if blog.created_at != blog.updated_at %}
+    
+                    <small>Updated at: {{ blog.updated_at }}</small> 
+                    <br>
+                {% endif %}
+            <br><br>
+            {{ blog.content }}
+            
+        </div>  
+            
+            
+    {% endfor %}
+</div>
+    
+</body>
+</html>
